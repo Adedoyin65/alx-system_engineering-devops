@@ -1,2 +1,2 @@
 #!/bin/bash
-less /etc/passwd | less /etc/hosts
+sort /etc/passwd | sort /etc/hosts
