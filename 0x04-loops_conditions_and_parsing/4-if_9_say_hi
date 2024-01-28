@@ -7,7 +7,7 @@ do
 	echo "$dan"
 if [ $i -eq 9 ];then
 
-	echo "hi"
+	echo "Hi"
 fi
 ((i++))
 done
