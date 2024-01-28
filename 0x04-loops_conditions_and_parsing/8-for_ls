@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# A bash script that displays the content of the current dir without the hid
+#+ den files and also prints the name of the files only without the characte
+#+ rs before the '-' and the '-' inclusive.
+for i in *;
+do
+if [[ ! $i == .* ]];then
+echo "$i" | cut -d '-' -f 2-
+fi
+done
