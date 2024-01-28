@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+# A bash script that displays the time for 12 hours and 59 minutes.
+dan=0
+guv=1
+while [ $dan -le 12 ]
+do
+	echo "Hour: $dan"
+while [ $guv -le 59 ]
+do
+
+	echo "$guv"
+((guv++))
+done
+guv=1
+((dan++))
+done
