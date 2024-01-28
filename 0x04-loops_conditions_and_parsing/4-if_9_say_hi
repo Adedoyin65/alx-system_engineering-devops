@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+# A bash script that displays hi on the 9th iteration.
+dan='Best School'
+i=1
+while [ $i -le 10 ]
+do
+	echo "$dan"
+if [ $i == 9 ];then
+
+	echo "hi"
+fi
+((i++))
+done
