@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# A bash script that uses the until loop.
+dan='Best School'
+i=1
+until [ $i -gt 10 ]
+do
+echo "$dan"
+((i++))
+done
