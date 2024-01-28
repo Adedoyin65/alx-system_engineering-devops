@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# This script displays "Best School" 10 times using a while loop.
+dan='Best School'
+i=0
+while [ $i -lt 10 ]
+do 
+	echo "$dan" 
+	((i++)) 
+done
