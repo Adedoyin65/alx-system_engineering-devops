@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Define variables for server IP/domain and port (if non-default)
-server="52.201.212.97"
+server="52.91.168.104"
 port="22"
 private_key="~/.ssh/school"
 
