@@ -1,9 +1,8 @@
 #!/usr/bin/env bash
+# A bash script that uses ssh to connect to your server
 # Define variables for server IP/domain and port (if non-default)
 server="52.91.168.104"
 port="22"
 private_key="/root/.ssh/school"
-# Set correct permissions for the private key
-chmod 600 "$private_key"
 # SSH connection command using single-character flags
 ssh -i "$private_key" -p "$port" "ubuntu@$server"
