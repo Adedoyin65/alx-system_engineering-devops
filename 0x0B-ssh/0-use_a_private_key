@@ -2,6 +2,7 @@
 # Define variables for server IP/domain and port (if non-default)
 server="52.91.168.104"
 port="22"
+user="ubuntu"
 private_key="~/.ssh/school"
 # SSH connection command using single-character flags
-ssh -i "$private_key" -p "$port" "ubuntu@$server"
+ssh -i "$private_key" -p "$port" "$user@$server"
