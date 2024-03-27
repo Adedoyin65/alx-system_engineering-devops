@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+
+# Update package index and install nginx
+apt-get update
+apt-get install -y nginx
+
+# Create a custom HTML file with "Hello World!"
+cat <<EOF > /var/www/html/index.html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Welcome to Nginx</title>
+</head>
+<body>
+    <h1>Hello World!</h1>
+</body>
+</html>
+EOF
+
+# Configure nginx to listen on port 80 and serve the custom page
+cat <<EOF > /etc/nginx/sites-available/default
+server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+
+    root /var/www/html;
+    index index.html;
+
+    server_name _;
+
+    location / {
+        try_files \$uri \$uri/ =404;
+    }
+}
+EOF
+
+# Restart nginx without using systemctl
+service nginx stop
+sleep 2  # Wait for nginx to stop completely
+service nginx start
