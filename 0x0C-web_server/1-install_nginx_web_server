@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
-
-# Update package index and install nginx
+# A bash script that sets up my DNS to point to my web IP address.
 apt-get update
 apt-get install -y nginx
 
