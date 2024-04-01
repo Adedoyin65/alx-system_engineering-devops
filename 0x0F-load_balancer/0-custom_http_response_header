@@ -4,24 +4,11 @@
 sudo apt update
 sudo apt install nginx -y
 
-# Get the hostname of the server
-HOSTNAME=$(hostname)
+# Define the custom header configuration
+CUSTOM_HEADER_CONFIG="add_header X-Served-By \$hostname;"
 
-# Create a configuration file for the custom header
-echo "
-server {
-    listen 80;
-    server_name localhost;
-
-    location / {
-        # Add custom HTTP header
-        add_header X-Served-By $HOSTNAME;
-    }
-}
-" | sudo tee /etc/nginx/sites-available/custom_header
-
-# Create a symbolic link to enable the new configuration
-sudo ln -s /etc/nginx/sites-available/custom_header /etc/nginx/sites-enabled/
+# Add the custom header configuration to the default Nginx configuration file
+echo "$CUSTOM_HEADER_CONFIG" | sudo tee -a /etc/nginx/nginx.conf > /dev/null
 
 # Test Nginx configuration for syntax errors
 sudo nginx -t
