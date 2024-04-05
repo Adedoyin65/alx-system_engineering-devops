@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# A bash script that creates an RSA key pair.
+
 # Define variables
 key_name="school"
 key_bits="4096"
