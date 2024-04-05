@@ -8,7 +8,5 @@ active_ips=$(ip -4 addr show | grep inet | awk '{print $2}' | cut -d'/' -f1)
 for ip in $active_ips; do
     if sudo netstat -tuln | grep -q ":80 " | grep -q "$ip"; then
         echo "Nginx is listening on port 80 for IP: $ip"
-    else
-        echo "Nginx is not listening on port 80 for IP: $ip"
     fi
 done
