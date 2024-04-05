@@ -24,12 +24,12 @@ audit_domain() {
     display_subdomain_info "$domain" "web-02"
 }
 
-# Check if both arguments are provided
-if [[ $# -eq 2 ]]; then
-    audit_domain "$1" "$2"
-elif [[ $# -eq 1 ]]; then
-    # Display information for default subdomains
+# Check if domain argument is provided
+if [[ $# -eq 1 ]]; then
     audit_domain "$1"
+# Check if both domain and subdomain arguments are provided
+elif [[ $# -eq 2 ]]; then
+    display_subdomain_info "$1" "$2"
 else
     echo "Usage: $0 <domain> [<subdomain>]"
     exit 1
