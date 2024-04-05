@@ -6,7 +6,7 @@ key_name="school"
 key_bits="4096"
 passphrase="betty"
 # Generate RSA key pair with passphrase
-ssh-keygen -t rsa -b "$key_bits" -f ~/.ssh/"$key_name" -N "$passphrase"
+openssl genpkey -algorithm RSA -out ~/.ssh/"$key_name" -aes256 -pass pass:"$passphrase" -pkeyopt rsa_keygen_bits:"$key_bits"
 
 echo "RSA key pair generated successfully:"
 echo "Private key: ~/.ssh/$key_name"
