@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# A bash script that configures an ubuntu nginx to listen to port 80
+# A bash script that checks if all server’s active IPv4 IPs on nginx listen to port 80
 
 # Get a list of active IPv4 IPs on the server
 active_ips=$(ip -4 addr show | grep inet | awk '{print $2}' | cut -d'/' -f1)
