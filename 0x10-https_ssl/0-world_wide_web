@@ -13,18 +13,6 @@ display_subdomain_info() {
     echo "The subdomain $subdomain is a $record_type record and points to $destination"
 }
 
-# Function to update DNS record for a subdomain
-update_dns_record() {
-    local domain=$1
-    local subdomain=$2
-    local ip_address=$3
-
-    # Command to update DNS record, replace with appropriate command for your DNS provider
-    # For example, if using AWS Route 53:
-    # aws route53 change-resource-record-sets --hosted-zone-id <zone_id> --change-batch file://update_record.json
-    echo "Updating DNS record for $subdomain to point to $ip_address"
-}
-
 # Main function to display information for subdomains
 audit_domain() {
     local domain=$1
