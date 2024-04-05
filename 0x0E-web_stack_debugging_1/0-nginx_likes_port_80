@@ -7,20 +7,14 @@ if ! command -v nginx &> /dev/null; then
     exit 1
 fi
 
-# Check Nginx configuration syntax
-sudo nginx -t
+# Get a list of active IPv4 IPs on the server
+active_ips=$(ip -4 addr show | grep inet | awk '{print $2}' | cut -d'/' -f1)
 
-# Check if Nginx is already running
-if pgrep nginx &> /dev/null; then
-    echo "Nginx is already running."
-else
-    echo "Nginx is not running. Starting..."
-    sudo systemctl start nginx
-fi
-
-# Check if Nginx is listening on port 80
-if sudo netstat -tuln | grep -q ":80 "; then
-    echo "Nginx is listening on port 80."
-else
-    echo "Nginx is not listening on port 80."
-fi
+# Check if Nginx is listening on port 80 for each active IP
+for ip in $active_ips; do
+    if sudo netstat -tuln | grep -q ":80 " | grep -q "$ip"; then
+        echo "Nginx is listening on port 80 for IP: $ip"
+    else
+        echo "Nginx is not listening on port 80 for IP: $ip"
+    fi
+done
