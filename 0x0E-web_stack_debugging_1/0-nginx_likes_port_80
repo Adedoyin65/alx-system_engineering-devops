@@ -8,7 +8,7 @@ if ! command -v nginx &> /dev/null; then
 fi
 
 # Check Nginx configuration syntax
-nginx -t
+sudo nginx -t
 
 # Check if Nginx is already running
 if pgrep nginx &> /dev/null; then
