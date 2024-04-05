@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+# A bash script that configures an ubuntu nginx to listen to port 80
+
+# Check if Nginx is installed
+if ! command -v nginx &> /dev/null; then
+    echo "Nginx is not installed."
+    exit 1
+fi
+
+# Check Nginx configuration syntax
+nginx -t
+
+# Check if Nginx is already running
+if pgrep nginx &> /dev/null; then
+    echo "Nginx is already running."
+else
+    echo "Nginx is not running. Starting..."
+    sudo systemctl start nginx
+fi
+
+# Check if Nginx is listening on port 80
+if sudo netstat -tuln | grep -q ":80 "; then
+    echo "Nginx is listening on port 80."
+else
+    echo "Nginx is not listening on port 80."
+fi
