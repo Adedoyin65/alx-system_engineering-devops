@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 # A bash script that checks if all server’s active IPv4 IPs on nginx listen to port 80
 
-# Path to the Nginx configuration file
-nginx_conf="/etc/nginx/nginx.conf"
-# Add or modify the listen directive to port 80
-sudo sed -i 's/\(^\s*listen\s*\)[0-9]*\(\s*;\)/\180\2/g' "$nginx_conf"
+# Path to the Nginx default server block configuration file
+default_server_block="/etc/nginx/sites-available/default"
+# Modify the default server block to listen on port 80
+sudo sed -i 's/\(^\s*listen\s*\)[0-9]*\(\s*;\)/\180\2/g' "$default_server_block"
 sudo nginx -t
 sudo systemctl restart nginx
