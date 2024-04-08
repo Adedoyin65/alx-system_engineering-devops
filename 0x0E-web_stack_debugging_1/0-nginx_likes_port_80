@@ -5,12 +5,5 @@
 nginx_conf="/etc/nginx/nginx.conf"
 # Add or modify the listen directive to port 80
 sudo sed -i 's/\(^\s*listen\s*\)[0-9]*\(\s*;\)/\180\2/g' "$nginx_conf"
-# Get a list of active IPv4 IPs on the server
-active_ips=$(ip -4 addr show | grep inet | awk '{print $2}' | cut -d'/' -f1)
-
-# Check if Nginx is listening on port 80 for each active IP
-for ip in $active_ips; do
-    if sudo netstat -tuln | grep -q ":80 " | grep -q "$ip"; then
-        echo "Nginx is listening on port 80 for IP: $ip"
-    fi
-done
+sudo nginx -t
+sudo systemctl restart nginx
