@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# A script that installs ufw
 
 # Update package list
 sudo apt update
