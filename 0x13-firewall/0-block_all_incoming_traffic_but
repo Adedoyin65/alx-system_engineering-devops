@@ -6,11 +6,14 @@ sudo apt update
 # Install UFW
 sudo apt install ufw -y
 
-# Set default policy to deny incoming traffic
+# Set default policies
 sudo ufw default deny incoming
+sudo ufw default allow outgoing
 
-# If you want to allow multiple ports, you can specify them separated by commas:
-sudo ufw allow 80,443,22
+# Allow specific ports
+sudo ufw allow 22/tcp
+sudo ufw allow 443/tcp
+sudo ufw allow 80/tcp
 
 # Enable UFW
 sudo ufw enable
