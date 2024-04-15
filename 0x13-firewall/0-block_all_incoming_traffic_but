@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+# Update package list
+sudo apt update
+
+# Install UFW
+sudo apt install ufw -y
+
+# Set default policy to deny incoming traffic
+sudo ufw default deny incoming
+
+# If you want to allow multiple ports, you can specify them separated by commas:
+sudo ufw allow 80,443,22
+
+# Enable UFW
+sudo ufw enable
+
+# Check status
+sudo ufw status
