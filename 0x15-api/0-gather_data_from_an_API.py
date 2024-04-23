@@ -1,31 +1,31 @@
 #!/usr/bin/python3
-"""A python script that, using this REST API, for a given employee ID,
-returns information about his/her TODO list progress."""
-import json
-import urllib.request
+"""A python script that, using this REST API, for a given employee
+ID, returns information about his/her TODO list progress"""
+import requests
 
 
-def get_user_name(user_id):
+def get_employee_name(employee_id):
     # Construct the URL for the user API endpoint
-    url = f"https://jsonplaceholder.typicode.com/users/{user_id}"
+    url = f"https://jsonplaceholder.typicode.com/users/{employee_id}"
 
     try:
         # Send a GET request to the API endpoint
-        with urllib.request.urlopen(url) as response:
-            # Read the response and decode it from bytes to a string
-            data = response.read().decode("utf-8")
-            # Convert the response string to a JSON object
-            user_data = json.loads(data)
-            # Return the username
-            return user_data['username']
+        response = requests.get(url)
 
-    except urllib.error.HTTPError as e:
-        # Print an error message if the HTTP request fails
-        print(f"HTTP Error: {e.code} - {e.reason}")
-    except urllib.error.URLError as e:
+        # Check if the request was successful (status code 200)
+        if response.status_code == 200:
+            # Convert the response to JSON format
+            user_data = response.json()
+            # Return the employee name
+            return user_data.get('name', 'Unknown')
+        else:
+            # Print an error message if the request was not successful
+            print("Error:", response.status_code)
+            return "Unknown"
+    except requests.exceptions.RequestException as e:
         # Print an error message if there was a connection error
-        print(f"Connection Error: {e.reason}")
-    return "Unknown"
+        print("Connection Error:", e)
+        return "Unknown"
 
 
 def get_todo_progress(employee_id):
@@ -34,14 +34,15 @@ def get_todo_progress(employee_id):
 
     try:
         # Send a GET request to the API endpoint
-        with urllib.request.urlopen(url) as response:
-            # Read the response and decode it from bytes to a string
-            data = response.read().decode("utf-8")
-            # Convert the response string to a JSON object
-            todos = json.loads(data)
+        response = requests.get(url)
+
+        # Check if the request was successful (status code 200)
+        if response.status_code == 200:
+            # Convert the response to JSON format
+            todos = response.json()
 
             # Get the employee name
-            employee_name = get_user_name(employee_id)
+            employee_name = get_employee_name(employee_id)
 
             # Count the number of completed tasks
             done_tasks = [todo['title'] for todo in todos if todo['completed']]
@@ -50,21 +51,22 @@ def get_todo_progress(employee_id):
             # Total number of tasks
             total_number_of_tasks = len(todos)
 
-            # Print employee TODO list progress
             a = employee_name
             b = number_of_done_tasks
             c = total_number_of_tasks
+            # Print employee TODO list progress
             print(f"Employee {a} is done with tasks ({b}/{c}):")
+
             # Print titles of completed tasks
             for task in done_tasks:
-                print(f"\t{task}")
+                print(f"     {task}")
 
-    except urllib.error.HTTPError as e:
-        # Print an error message if the HTTP request fails
-        print(f"HTTP Error: {e.code} - {e.reason}")
-    except urllib.error.URLError as e:
+        else:
+            # Print an error message if the request was not successful
+            print("Error:", response.status_code)
+    except requests.exceptions.RequestException as e:
         # Print an error message if there was a connection error
-        print(f"Connection Error: {e.reason}")
+        print("Connection Error:", e)
 
 
 if __name__ == "__main__":
