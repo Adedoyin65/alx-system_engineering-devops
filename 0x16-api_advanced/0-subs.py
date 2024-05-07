@@ -2,6 +2,7 @@
 """A module that sends a http request to reddit api"""
 import requests
 
+
 def number_of_subscribers(subreddit):
     url = f"https://www.reddit.com/r/subreddit/{subreddit}"
     headers = {'User-Agent': "My Reddit API Client"}
