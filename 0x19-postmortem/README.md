@@ -1,0 +1,1 @@
+A postmortem is a review or analysis conducted after a project, event, or process has concluded. It's aimed at identifying what went well, what didn't, and how to improve in the future. It's like a retrospective analysis to learn from past experiences.
